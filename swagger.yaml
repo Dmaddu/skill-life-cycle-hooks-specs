@@ -50,8 +50,6 @@ tags:
   name: Cohort
 - description: Node Filter Management
   name: Filter
-- description: Hook Management
-  name: Hook
 - description: Node List Management
   name: List
 - description: Node Management
@@ -250,6 +248,21 @@ paths:
                     fileName: config.rb
                     filePath: /etc/chef
                     windowsFilePath: c:/chef
+                  hooks:
+                    preInstall:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                      timeoutSeconds: 60
+                    postInstall:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                      timeoutSeconds: 30
+                    preUpdate:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                      timeoutSeconds: 60
+                    postUpdate:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                      timeoutSeconds: 30
               chef-gohai-example:
                 value:
                   name: chef-gohai
@@ -546,6 +559,21 @@ paths:
                         fileName: config.rb
                         filePath: /etc/chef
                         windowsFilePath: c:/chef
+                      hooks:
+                        preInstall:
+                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                          timeoutSeconds: 60
+                        postInstall:
+                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                          timeoutSeconds: 30
+                        preUpdate:
+                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                          timeoutSeconds: 60
+                        postUpdate:
+                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                          timeoutSeconds: 30
                 chef-gohai:
                   value:
                     kind: object
@@ -706,6 +734,19 @@ paths:
                 fileName: config.rb
                 filePath: /etc/chef
                 windowsFilePath: c:/chef
+              hooks:
+                preInstall:
+                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                  timeoutSeconds: 60
+                preUpdate:
+                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                  timeoutSeconds: 60
+                preDelete:
+                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
+                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
+                  timeoutSeconds: 30
             schema:
               $ref: "#/components/schemas/skill-update"
         description: The updated skill definition
@@ -3467,8 +3508,7 @@ paths:
                 kind: object
                 code: 200
                 item:
-                  cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-                  skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
+                  nodeVersion: 1
                   settingsId: 56fe8dfb-9c67-4e47-8003-7452b47baf35
                   settingsVersion: 1
                   requiredSkills:
@@ -3485,17 +3525,6 @@ paths:
                       value: http://dev.my-chef-server.com
                     - name: validation_client_name
                       value: my-dev-client
-                  requiredSkillHooks:
-                  - skillName: chef-infra-client
-                    preInstall:
-                      id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-                      timeoutSeconds: 60
-                    postInstall:
-                      id: b2c3d4e5-f6a7-4901-b678-fg2345678901
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
-                      timeoutSeconds: 30
               schema:
                 $ref: "#/components/schemas/node_checkin_response"
           description: The node check-in is successful.
@@ -3642,10 +3671,7 @@ paths:
                 items:
                 - id: c3d4e5f6-a7b8-4012-c789-gh3456789012
                   skillName: chef-infra-client
-                  cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-                  skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-                  hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  hookName: pre-converge-hook
+                  skillVersion: 18.4.2
                   lifecycleStage: pre_install
                   status: failure
                   exitCode: 1
@@ -3654,16 +3680,22 @@ paths:
                   executedAt: 2026-04-08T11:00:00Z
                 - id: d4e5f6a7-b8c9-4123-d890-hi4567890123
                   skillName: chef-infra-client
-                  cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-                  skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-                  hookId: b2c3d4e5-f6a7-4901-b678-fg2345678901
-                  hookName: post-install-hook
+                  skillVersion: 18.4.2
                   lifecycleStage: post_install
                   status: success
                   exitCode: 0
                   stdout: Post-install hook completed successfully
                   stderr: ""
                   executedAt: 2026-04-08T11:05:00Z
+                - id: e5f6a7b8-c9d0-4234-e901-ij5678901234
+                  skillName: chef-infra-client
+                  skillVersion: 18.5.0
+                  lifecycleStage: pre_update
+                  status: success
+                  exitCode: 0
+                  stdout: "Pre-update hook: draining connections"
+                  stderr: ""
+                  executedAt: 2026-04-09T09:00:00Z
               schema:
                 $ref: "#/components/schemas/node_hook_executions_response"
           description: A paginated list of hook execution statuses for the node.
@@ -3805,9 +3837,7 @@ paths:
           application/json:
             example:
               skillName: chef-infra-client
-              cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-              skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-              hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
+              skillVersion: 18.4.2
               lifecycleStage: pre_install
               status: failure
               exitCode: 1
@@ -3827,10 +3857,7 @@ paths:
                 item:
                   id: c3d4e5f6-a7b8-4012-c789-gh3456789012
                   skillName: chef-infra-client
-                  cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-                  skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-                  hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  hookName: pre-converge-hook
+                  skillVersion: 18.4.2
                   lifecycleStage: pre_install
                   status: failure
                   exitCode: 1
@@ -9406,18 +9433,12 @@ paths:
                       name: chef-infra
                       value:
                       - 17.0.1
-                    hooks:
-                      preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
                   - action: remove
                     skill:
                       channel: stable
                       name: chef-infra
                       value:
                       - < 17
-                    hooks:
-                      preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
                 - id: 3f8f2fed-089a-4a1e-b5fd-42961db20c7d
                   name: my-empty-skill-assembly
                   description: An empty skill assembly for testing purposes
@@ -9493,17 +9514,11 @@ paths:
                       name: chef-gohai
                       value:
                       - 1.2.7
-                    hooks:
-                      preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
                   - action: remove
                     skill:
                       name: chef-gohai
                       value:
                       - < 1.0.0
-                    hooks:
-                      preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
               add-skill-version-remove-specific-version:
                 value:
                   name: my-skill-assembly
@@ -9515,17 +9530,11 @@ paths:
                       name: chef-gohai
                       value:
                       - 1.2.7
-                    hooks:
-                      preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
                   - action: remove
                     skill:
                       name: chef-gohai
                       value:
                       - = 1.2.4
-                    hooks:
-                      preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
               add-multiple-skill-versions:
                 value:
                   name: my-skill-assembly
@@ -9538,9 +9547,6 @@ paths:
                       value:
                       - 1.2.7
                       - 1.3.0
-                    hooks:
-                      preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
             schema:
               $ref: "#/components/schemas/skill-assembly-create"
         description: The skill assembly to be added
@@ -9870,18 +9876,12 @@ paths:
                       name: chef-infra
                       value:
                       - 17.0.1
-                    hooks:
-                      preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
                   - action: remove
                     skill:
                       channel: stable
                       name: chef-infra
                       value:
                       - < 17
-                    hooks:
-                      preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
               schema:
                 $ref: "#/components/schemas/skill_assembly_get_response"
           description: The skill assembly get response
@@ -9973,9 +9973,6 @@ paths:
                   name: chef-infra
                   value:
                   - 17.0.1
-                hooks:
-                  preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
               description: This is an updated skill assembly description.
             schema:
               $ref: "#/components/schemas/skill-assembly-update"
@@ -10000,18 +9997,12 @@ paths:
                       name: chef-infra
                       value:
                       - 17.0.1
-                    hooks:
-                      preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
                   - action: remove
                     skill:
                       channel: stable
                       name: chef-infra
                       value:
                       - < 17
-                    hooks:
-                      preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                      postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
               schema:
                 $ref: "#/components/schemas/skill_assembly_get_response"
           description: The skill assembly get response
@@ -10290,830 +10281,7 @@ paths:
         settings.
       tags:
       - Skill
-  /hooks:
-    get:
-      description: |
-        This operation allows users to retrieve a paginated list of hooks
-        registered under node management in the current organization.
-      operationId: hooks.list-hooks
-      parameters:
-      - description: items per page
-        example: 10
-        explode: false
-        in: query
-        name: pagination.size
-        required: false
-        schema:
-          type: integer
-        style: form
-        x-default: 10
-      - description: what page of the pagination
-        example: 1
-        explode: false
-        in: query
-        name: pagination.page
-        required: false
-        schema:
-          type: integer
-        style: form
-        x-default: 1
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                kind: paginated
-                code: 200
-                params:
-                  query:
-                    pagination:
-                      start: 1
-                pagination:
-                  pageItemCount: 2
-                  itemsPerPage: 10
-                  startIndex: 1
-                  totalItems: 2
-                  page: 1
-                  totalPages: 1
-                items:
-                - id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  name: pre-converge-hook
-                  description: Runs a setup script before Chef Infra converge
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-                  timeoutSeconds: 300
-                  createdAt: 2024-01-15T10:00:00Z
-                  updatedAt: 2024-01-15T10:00:00Z
-                - id: b2c3d4e5-f6a7-4901-b234-f12345678901
-                  name: post-converge-hook
-                  description: Runs a cleanup script after Chef Infra converge
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWNvbnZlcmdlIGhvb2snCg==
-                  timeoutSeconds: 60
-                  createdAt: 2024-01-16T08:30:00Z
-                  updatedAt: 2024-01-16T08:30:00Z
-              schema:
-                $ref: "#/components/schemas/hook_list_response"
-          description: A paginated list of hooks.
-        "422":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 422
-                message: Unprocessable Content
-                errors:
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field1
-                    value: abcd
-                    condition: Integer
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field3.subField
-                    value: "1234"
-                    condition: MaxValue
-                    argument: "100"
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: "field5[4]"
-                    value: abcd
-                    condition: Expression
-                    argument: ^The
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: "field6[4].subField"
-                    value: null
-                    condition: Required
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field6.subField.subField
-                    value: null
-                    condition: Required
-              schema:
-                $ref: "#/components/schemas/wrapper-validation"
-          description: |
-            The request failed data validation -  the syntax of a request entity for a 422 error is correct but  the data in the request failed validation
-        "401":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 401
-                message: Unauthorized
-                errors:
-                - service: gateway
-                  reason: Missing-Credentials
-                  message: The client request has not been completed because it lacks
-                    valid authentication credentials for the requested resource.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Indicates that the request requires user authentication information.  This should be returned by the API Gateway if the credentials are missing (or session is expired)  or by a service if the message signature is missing or invalid
-        "403":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 403
-                message: Forbidden
-                errors:
-                - service: gateway
-                  reason: Route-Deny
-                  message: Insufficient permissions to access the requested resource
-                    or route.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The client does not have access rights to the content. This should be returned by the API Gateway if the role deny's the route or by a service if ABAC (object permissions) deny the action
-        "500":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 500
-                message: Internal Server Error
-                errors:
-                - service: service
-                  reason: NameOfException
-                  message: Message of the exception
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The server encountered an unexpected condition that prevented
-            it from fulfilling the request.
-      summary: List all hooks under node management.
-      tags:
-      - Hook
-    post:
-      description: |
-        This operation creates a new hook in node management.
-        A hook is a script that executes on a remote node.
-        Provide the hook name and the script content to be executed.
-      operationId: hooks.create-hook
-      requestBody:
-        content:
-          application/json:
-            examples:
-              bash-hook-example:
-                value:
-                  name: pre-converge-hook
-                  description: Runs a setup script before Chef Infra converge
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycKYXB0LWdldCB1cGRhdGUgLXkK
-                  timeoutSeconds: 300
-              powershell-hook-example:
-                value:
-                  name: windows-pre-converge-hook
-                  description: Runs a PowerShell setup script before converge on Windows
-                    nodes
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycKR2V0LVdpbmRvd3NVcGRhdGUK
-                  timeoutSeconds: 120
-              cross-platform-hook-example:
-                value:
-                  name: cross-platform-pre-converge-hook
-                  description: Runs on both Linux and Windows nodes before Chef Infra
-                    converge
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycKYXB0LWdldCB1cGRhdGUgLXkK
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycKR2V0LVdpbmRvd3NVcGRhdGUK
-                  timeoutSeconds: 300
-            schema:
-              $ref: "#/components/schemas/hook-create"
-        description: The hook to be created
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              example:
-                kind: object
-                code: 201
-                item:
-                  id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  name: pre-converge-hook
-                  description: Runs a setup script before Chef Infra converge
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-                  timeoutSeconds: 300
-                  createdAt: 2024-01-15T10:00:00Z
-                  updatedAt: 2024-01-15T10:00:00Z
-              schema:
-                $ref: "#/components/schemas/hook_create_response"
-          description: The hook has been successfully created.
-        "400":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 400
-                message: Bad Request
-                errors:
-                - service: http
-                  reason: Malformed-Request
-                  message: "the server cannot or will not process the request due\
-                    \ to something that is perceived to be a client error  (for example,\
-                    \ malformed request syntax, invalid request message framing, or\
-                    \ deceptive request routing).        \n"
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The request could not be understood by the server due to incorrect
-            syntax.
-        "409":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 409
-                message: Conflict
-                errors:
-                - service: service
-                  reason: Conflict
-                  message: Request conflict with the current state of the target resource.
-                - service: service
-                  reason: Not-Unique
-                  message: A field supplied was expected to be unique.
-                  context:
-                    field: name
-                    scope: organization
-                    value: example
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The request could not be completed due to a conflict with the
-            current state of the resource.
-        "422":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 422
-                message: Unprocessable Content
-                errors:
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field1
-                    value: abcd
-                    condition: Integer
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field3.subField
-                    value: "1234"
-                    condition: MaxValue
-                    argument: "100"
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: "field5[4]"
-                    value: abcd
-                    condition: Expression
-                    argument: ^The
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: "field6[4].subField"
-                    value: null
-                    condition: Required
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field6.subField.subField
-                    value: null
-                    condition: Required
-              schema:
-                $ref: "#/components/schemas/wrapper-validation"
-          description: |
-            The request failed data validation -  the syntax of a request entity for a 422 error is correct but  the data in the request failed validation
-        "401":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 401
-                message: Unauthorized
-                errors:
-                - service: gateway
-                  reason: Missing-Credentials
-                  message: The client request has not been completed because it lacks
-                    valid authentication credentials for the requested resource.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Indicates that the request requires user authentication information.  This should be returned by the API Gateway if the credentials are missing (or session is expired)  or by a service if the message signature is missing or invalid
-        "403":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 403
-                message: Forbidden
-                errors:
-                - service: gateway
-                  reason: Route-Deny
-                  message: Insufficient permissions to access the requested resource
-                    or route.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The client does not have access rights to the content. This should be returned by the API Gateway if the role deny's the route or by a service if ABAC (object permissions) deny the action
-        "500":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 500
-                message: Internal Server Error
-                errors:
-                - service: service
-                  reason: NameOfException
-                  message: Message of the exception
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The server encountered an unexpected condition that prevented
-            it from fulfilling the request.
-      summary: Create a hook.
-      tags:
-      - Hook
-  /hooks/{hookId}:
-    delete:
-      description: |
-        Use this operation to delete a hook using its id.
-      operationId: hooks.delete-hook
-      parameters:
-      - description: Id of the hook
-        explode: false
-        in: path
-        name: hookId
-        required: true
-        schema:
-          $ref: "#/components/schemas/uuid"
-        style: simple
-      - description: |
-          If-Match will compare the supplied etag to the resource requested. If the etag does not match the operation will be aborted.
-        example: 33a64df551425fcc55e4d42a148795d9f25f89d4
-        explode: false
-        in: header
-        name: If-Match
-        required: false
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                kind: empty
-                code: 200
-                message: Deleted successfully
-              schema:
-                allOf:
-                - $ref: "#/components/schemas/success-empty"
-                title: hook-delete-response
-          description: The hook has been successfully deleted.
-        "404":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 404
-                message: Not Found
-                errors:
-                - service: service-name
-                  reason: Missing-Resource
-                  message: The server could not located the requested resource
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The service can not find the requested resource. This is returned by the API Gateway or Service if the route does not exist  or by a service if the object requested does not exist
-        "412":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 412
-                message: Precondition Failed
-                parameters:
-                  header:
-                    TenantId: 253c0912-67f0-4fae-8723-91614ade5474
-                    OrganizationId: 2936634b-9760-40a2-9bdd-73291345cfdd
-                    UserId: f25f4511-5e2a-4018-983f-acbce79184e3
-                    If-Match: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                  path:
-                    NodeId: 7375ef03-794a-460b-9f7b-47f6faf7400e
-                errors:
-                - service: service
-                  reason: If-Match
-                  message: This happens with conditional requests on methods other
-                    than GET or HEAD when the condition defined by the If-Match header
-                    is not fulfilled.
-                  context:
-                    If-Match: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    ETag: ebeb4dbc1362d124452335a71286c21d
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Precondition Failed: when the If-Match header is included in the request, this status indicates that  the ETag information did not match and therefore the entity was not updated.
-          headers:
-            ETag:
-              $ref: "#/components/headers/etag"
-            If-Match:
-              $ref: "#/components/headers/etag"
-        "401":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 401
-                message: Unauthorized
-                errors:
-                - service: gateway
-                  reason: Missing-Credentials
-                  message: The client request has not been completed because it lacks
-                    valid authentication credentials for the requested resource.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Indicates that the request requires user authentication information.  This should be returned by the API Gateway if the credentials are missing (or session is expired)  or by a service if the message signature is missing or invalid
-        "403":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 403
-                message: Forbidden
-                errors:
-                - service: gateway
-                  reason: Route-Deny
-                  message: Insufficient permissions to access the requested resource
-                    or route.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The client does not have access rights to the content. This should be returned by the API Gateway if the role deny's the route or by a service if ABAC (object permissions) deny the action
-        "500":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 500
-                message: Internal Server Error
-                errors:
-                - service: service
-                  reason: NameOfException
-                  message: Message of the exception
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The server encountered an unexpected condition that prevented
-            it from fulfilling the request.
-      summary: Delete a hook by its id.
-      tags:
-      - Hook
-    get:
-      description: |
-        Use this operation to retrieve a hook by its id.
-      operationId: hooks.get-hook
-      parameters:
-      - description: Id of the hook
-        explode: false
-        in: path
-        name: hookId
-        required: true
-        schema:
-          $ref: "#/components/schemas/uuid"
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                kind: object
-                code: 200
-                params:
-                  path:
-                    hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                item:
-                  id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  name: pre-converge-hook
-                  description: Runs a setup script before Chef Infra converge
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-                  timeoutSeconds: 300
-                  createdAt: 2024-01-15T10:00:00Z
-                  updatedAt: 2024-01-15T10:00:00Z
-              schema:
-                $ref: "#/components/schemas/hook_get_response"
-          description: The requested hook.
-        "404":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 404
-                message: Not Found
-                errors:
-                - service: service-name
-                  reason: Missing-Resource
-                  message: The server could not located the requested resource
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The service can not find the requested resource. This is returned by the API Gateway or Service if the route does not exist  or by a service if the object requested does not exist
-        "401":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 401
-                message: Unauthorized
-                errors:
-                - service: gateway
-                  reason: Missing-Credentials
-                  message: The client request has not been completed because it lacks
-                    valid authentication credentials for the requested resource.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Indicates that the request requires user authentication information.  This should be returned by the API Gateway if the credentials are missing (or session is expired)  or by a service if the message signature is missing or invalid
-        "403":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 403
-                message: Forbidden
-                errors:
-                - service: gateway
-                  reason: Route-Deny
-                  message: Insufficient permissions to access the requested resource
-                    or route.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The client does not have access rights to the content. This should be returned by the API Gateway if the role deny's the route or by a service if ABAC (object permissions) deny the action
-        "500":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 500
-                message: Internal Server Error
-                errors:
-                - service: service
-                  reason: NameOfException
-                  message: Message of the exception
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The server encountered an unexpected condition that prevented
-            it from fulfilling the request.
-      summary: Get a hook by its id.
-      tags:
-      - Hook
-    put:
-      description: |
-        Use this operation to fully replace an existing hook.
-        All fields will be replaced with the provided values.
-      operationId: hooks.update-hook
-      parameters:
-      - description: Id of the hook
-        explode: false
-        in: path
-        name: hookId
-        required: true
-        schema:
-          $ref: "#/components/schemas/uuid"
-        style: simple
-      - description: |
-          If-Match will compare the supplied etag to the resource requested. If the etag does not match the operation will be aborted.
-        example: 33a64df551425fcc55e4d42a148795d9f25f89d4
-        explode: false
-        in: header
-        name: If-Match
-        required: false
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            example:
-              name: pre-converge-hook
-              description: Updated description for the pre-converge hook
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycKYXB0LWdldCB1cGRhdGUgLXkK
-              windowsScript: V3JpdGUtSG9zdCAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-            schema:
-              $ref: "#/components/schemas/hook-update"
-        description: The updated hook
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                kind: object
-                code: 200
-                params:
-                  path:
-                    hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                item:
-                  id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  name: pre-converge-hook
-                  description: Updated description for the pre-converge hook
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-                  windowsScript: V3JpdGUtSG9zdCAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-                  timeoutSeconds: 60
-                  createdAt: 2024-01-15T10:00:00Z
-                  updatedAt: 2024-01-20T14:30:00Z
-              schema:
-                $ref: "#/components/schemas/hook_update_response"
-          description: The hook after update.
-        "400":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 400
-                message: Bad Request
-                errors:
-                - service: http
-                  reason: Malformed-Request
-                  message: "the server cannot or will not process the request due\
-                    \ to something that is perceived to be a client error  (for example,\
-                    \ malformed request syntax, invalid request message framing, or\
-                    \ deceptive request routing).        \n"
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The request could not be understood by the server due to incorrect
-            syntax.
-        "404":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 404
-                message: Not Found
-                errors:
-                - service: service-name
-                  reason: Missing-Resource
-                  message: The server could not located the requested resource
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The service can not find the requested resource. This is returned by the API Gateway or Service if the route does not exist  or by a service if the object requested does not exist
-        "412":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 412
-                message: Precondition Failed
-                parameters:
-                  header:
-                    TenantId: 253c0912-67f0-4fae-8723-91614ade5474
-                    OrganizationId: 2936634b-9760-40a2-9bdd-73291345cfdd
-                    UserId: f25f4511-5e2a-4018-983f-acbce79184e3
-                    If-Match: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                  path:
-                    NodeId: 7375ef03-794a-460b-9f7b-47f6faf7400e
-                errors:
-                - service: service
-                  reason: If-Match
-                  message: This happens with conditional requests on methods other
-                    than GET or HEAD when the condition defined by the If-Match header
-                    is not fulfilled.
-                  context:
-                    If-Match: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                    ETag: ebeb4dbc1362d124452335a71286c21d
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Precondition Failed: when the If-Match header is included in the request, this status indicates that  the ETag information did not match and therefore the entity was not updated.
-          headers:
-            ETag:
-              $ref: "#/components/headers/etag"
-            If-Match:
-              $ref: "#/components/headers/etag"
-        "422":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 422
-                message: Unprocessable Content
-                errors:
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field1
-                    value: abcd
-                    condition: Integer
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field3.subField
-                    value: "1234"
-                    condition: MaxValue
-                    argument: "100"
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: "field5[4]"
-                    value: abcd
-                    condition: Expression
-                    argument: ^The
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: "field6[4].subField"
-                    value: null
-                    condition: Required
-                - service: validation
-                  reason: Regex"
-                  message: The document failed data validation
-                  context:
-                    field: field6.subField.subField
-                    value: null
-                    condition: Required
-              schema:
-                $ref: "#/components/schemas/wrapper-validation"
-          description: |
-            The request failed data validation -  the syntax of a request entity for a 422 error is correct but  the data in the request failed validation
-        "401":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 401
-                message: Unauthorized
-                errors:
-                - service: gateway
-                  reason: Missing-Credentials
-                  message: The client request has not been completed because it lacks
-                    valid authentication credentials for the requested resource.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            Indicates that the request requires user authentication information.  This should be returned by the API Gateway if the credentials are missing (or session is expired)  or by a service if the message signature is missing or invalid
-        "403":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 403
-                message: Forbidden
-                errors:
-                - service: gateway
-                  reason: Route-Deny
-                  message: Insufficient permissions to access the requested resource
-                    or route.
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: |
-            The client does not have access rights to the content. This should be returned by the API Gateway if the role deny's the route or by a service if ABAC (object permissions) deny the action
-        "500":
-          content:
-            application/json:
-              example:
-                kind: error
-                code: 500
-                message: Internal Server Error
-                errors:
-                - service: service
-                  reason: NameOfException
-                  message: Message of the exception
-              schema:
-                $ref: "#/components/schemas/wrapper-error"
-          description: The server encountered an unexpected condition that prevented
-            it from fulfilling the request.
-      summary: Update a hook by its id.
-      tags:
-      - Hook
 components:
-  headers:
-    etag:
-      description: |
-        The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.  It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response  if the content was not changed. Additionally, etags help to prevent simultaneous updates of a resource from  overwriting each other ("mid-air collisions").
-      example: 33a64df551425fcc55e4d42a148795d9f25f89d4
-      explode: false
-      schema:
-        type: string
   parameters:
     pagination-size:
       description: items per page
@@ -11275,26 +10443,6 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/uuid"
-      style: simple
-    hookId:
-      description: Id of the hook
-      explode: false
-      in: path
-      name: hookId
-      required: true
-      schema:
-        $ref: "#/components/schemas/uuid"
-      style: simple
-    if-match:
-      description: |
-        If-Match will compare the supplied etag to the resource requested. If the etag does not match the operation will be aborted.
-      example: 33a64df551425fcc55e4d42a148795d9f25f89d4
-      explode: false
-      in: header
-      name: If-Match
-      required: false
-      schema:
-        type: string
       style: simple
   responses:
     skills-200-paginated:
@@ -11506,6 +10654,21 @@ components:
                     fileName: config.rb
                     filePath: /etc/chef
                     windowsFilePath: c:/chef
+                  hooks:
+                    preInstall:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                      timeoutSeconds: 60
+                    postInstall:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                      timeoutSeconds: 30
+                    preUpdate:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                      timeoutSeconds: 60
+                    postUpdate:
+                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                      timeoutSeconds: 30
             chef-gohai:
               value:
                 kind: object
@@ -12014,8 +11177,7 @@ components:
             kind: object
             code: 200
             item:
-              cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-              skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
+              nodeVersion: 1
               settingsId: 56fe8dfb-9c67-4e47-8003-7452b47baf35
               settingsVersion: 1
               requiredSkills:
@@ -12032,17 +11194,6 @@ components:
                   value: http://dev.my-chef-server.com
                 - name: validation_client_name
                   value: my-dev-client
-              requiredSkillHooks:
-              - skillName: chef-infra-client
-                preInstall:
-                  id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-                  timeoutSeconds: 60
-                postInstall:
-                  id: b2c3d4e5-f6a7-4901-b678-fg2345678901
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
-                  timeoutSeconds: 30
           schema:
             $ref: "#/components/schemas/node_checkin_response"
       description: The node check-in is successful.
@@ -12066,10 +11217,7 @@ components:
             items:
             - id: c3d4e5f6-a7b8-4012-c789-gh3456789012
               skillName: chef-infra-client
-              cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-              skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-              hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-              hookName: pre-converge-hook
+              skillVersion: 18.4.2
               lifecycleStage: pre_install
               status: failure
               exitCode: 1
@@ -12078,16 +11226,22 @@ components:
               executedAt: 2026-04-08T11:00:00Z
             - id: d4e5f6a7-b8c9-4123-d890-hi4567890123
               skillName: chef-infra-client
-              cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-              skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-              hookId: b2c3d4e5-f6a7-4901-b678-fg2345678901
-              hookName: post-install-hook
+              skillVersion: 18.4.2
               lifecycleStage: post_install
               status: success
               exitCode: 0
               stdout: Post-install hook completed successfully
               stderr: ""
               executedAt: 2026-04-08T11:05:00Z
+            - id: e5f6a7b8-c9d0-4234-e901-ij5678901234
+              skillName: chef-infra-client
+              skillVersion: 18.5.0
+              lifecycleStage: pre_update
+              status: success
+              exitCode: 0
+              stdout: "Pre-update hook: draining connections"
+              stderr: ""
+              executedAt: 2026-04-09T09:00:00Z
           schema:
             $ref: "#/components/schemas/node_hook_executions_response"
       description: A paginated list of hook execution statuses for the node.
@@ -12100,10 +11254,7 @@ components:
             item:
               id: c3d4e5f6-a7b8-4012-c789-gh3456789012
               skillName: chef-infra-client
-              cohortId: 7a1b2c3d-4e5f-4890-a567-ef1234567890
-              skillAssemblyId: 8b2c3d4e-5f6a-4901-b678-fg2345678901
-              hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-              hookName: pre-converge-hook
+              skillVersion: 18.4.2
               lifecycleStage: pre_install
               status: failure
               exitCode: 1
@@ -12912,18 +12063,12 @@ components:
                   name: chef-infra
                   value:
                   - 17.0.1
-                hooks:
-                  preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
               - action: remove
                 skill:
                   channel: stable
                   name: chef-infra
                   value:
                   - < 17
-                hooks:
-                  preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
             - id: 3f8f2fed-089a-4a1e-b5fd-42961db20c7d
               name: my-empty-skill-assembly
               description: An empty skill assembly for testing purposes
@@ -12959,18 +12104,12 @@ components:
                   name: chef-infra
                   value:
                   - 17.0.1
-                hooks:
-                  preInstall: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  postInstall: b2c3d4e5-f6a7-4901-b234-f12345678901
               - action: remove
                 skill:
                   channel: stable
                   name: chef-infra
                   value:
                   - < 17
-                hooks:
-                  preDelete: a1b2c3d4-e5f6-4890-a567-ef1234567890
-                  postDelete: b2c3d4e5-f6a7-4901-b234-f12345678901
           schema:
             $ref: "#/components/schemas/skill_assembly_get_response"
       description: The skill assembly get response
@@ -12998,147 +12137,6 @@ components:
             - $ref: "#/components/schemas/success-empty"
             title: node-agent-skill-update-response
       description: The node management agent skill has been successfully updated.
-    hooks-200-paginated:
-      content:
-        application/json:
-          example:
-            kind: paginated
-            code: 200
-            params:
-              query:
-                pagination:
-                  start: 1
-            pagination:
-              pageItemCount: 2
-              itemsPerPage: 10
-              startIndex: 1
-              totalItems: 2
-              page: 1
-              totalPages: 1
-            items:
-            - id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-              name: pre-converge-hook
-              description: Runs a setup script before Chef Infra converge
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 300
-              createdAt: 2024-01-15T10:00:00Z
-              updatedAt: 2024-01-15T10:00:00Z
-            - id: b2c3d4e5-f6a7-4901-b234-f12345678901
-              name: post-converge-hook
-              description: Runs a cleanup script after Chef Infra converge
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWNvbnZlcmdlIGhvb2snCg==
-              timeoutSeconds: 60
-              createdAt: 2024-01-16T08:30:00Z
-              updatedAt: 2024-01-16T08:30:00Z
-          schema:
-            $ref: "#/components/schemas/hook_list_response"
-      description: A paginated list of hooks.
-    hook-201:
-      content:
-        application/json:
-          example:
-            kind: object
-            code: 201
-            item:
-              id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-              name: pre-converge-hook
-              description: Runs a setup script before Chef Infra converge
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 300
-              createdAt: 2024-01-15T10:00:00Z
-              updatedAt: 2024-01-15T10:00:00Z
-          schema:
-            $ref: "#/components/schemas/hook_create_response"
-      description: The hook has been successfully created.
-    hook-200:
-      content:
-        application/json:
-          example:
-            kind: object
-            code: 200
-            params:
-              path:
-                hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-            item:
-              id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-              name: pre-converge-hook
-              description: Runs a setup script before Chef Infra converge
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 300
-              createdAt: 2024-01-15T10:00:00Z
-              updatedAt: 2024-01-15T10:00:00Z
-          schema:
-            $ref: "#/components/schemas/hook_get_response"
-      description: The requested hook.
-    hook-200-updated:
-      content:
-        application/json:
-          example:
-            kind: object
-            code: 200
-            params:
-              path:
-                hookId: a1b2c3d4-e5f6-4890-a567-ef1234567890
-            item:
-              id: a1b2c3d4-e5f6-4890-a567-ef1234567890
-              name: pre-converge-hook
-              description: Updated description for the pre-converge hook
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-              windowsScript: V3JpdGUtSG9zdCAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              createdAt: 2024-01-15T10:00:00Z
-              updatedAt: 2024-01-20T14:30:00Z
-          schema:
-            $ref: "#/components/schemas/hook_update_response"
-      description: The hook after update.
-    "412":
-      content:
-        application/json:
-          example:
-            kind: error
-            code: 412
-            message: Precondition Failed
-            parameters:
-              header:
-                TenantId: 253c0912-67f0-4fae-8723-91614ade5474
-                OrganizationId: 2936634b-9760-40a2-9bdd-73291345cfdd
-                UserId: f25f4511-5e2a-4018-983f-acbce79184e3
-                If-Match: 33a64df551425fcc55e4d42a148795d9f25f89d4
-              path:
-                NodeId: 7375ef03-794a-460b-9f7b-47f6faf7400e
-            errors:
-            - service: service
-              reason: If-Match
-              message: This happens with conditional requests on methods other than
-                GET or HEAD when the condition defined by the If-Match header is not
-                fulfilled.
-              context:
-                If-Match: 33a64df551425fcc55e4d42a148795d9f25f89d4
-                ETag: ebeb4dbc1362d124452335a71286c21d
-          schema:
-            $ref: "#/components/schemas/wrapper-error"
-      description: |
-        Precondition Failed: when the If-Match header is included in the request, this status indicates that  the ETag information did not match and therefore the entity was not updated.
-      headers:
-        ETag:
-          $ref: "#/components/headers/etag"
-        If-Match:
-          $ref: "#/components/headers/etag"
-    hook-200-delete:
-      content:
-        application/json:
-          example:
-            kind: empty
-            code: 200
-            message: Deleted successfully
-          schema:
-            allOf:
-            - $ref: "#/components/schemas/success-empty"
-            title: hook-delete-response
-      description: The hook has been successfully deleted.
   schemas:
     wrapper-paginated:
       description: successful response that returns a single object
@@ -13182,6 +12180,31 @@ components:
           versionRegex: "sed -nre 's/^[^0-9]*(([0-9]+\\.)*[0-9]+).*/\\1/p'"
           versionCommand: chef-client --version
         name: name
+        hooks:
+          preInstall:
+            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+            timeoutSeconds: 60
+            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          postUpdate:
+            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+            timeoutSeconds: 60
+            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          postInstall:
+            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+            timeoutSeconds: 60
+            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          postDelete:
+            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+            timeoutSeconds: 60
+            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          preDelete:
+            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+            timeoutSeconds: 60
+            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          preUpdate:
+            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+            timeoutSeconds: 60
+            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         dependencies:
         - dependencies
         - dependencies
@@ -13202,6 +12225,8 @@ components:
           items:
             type: string
           type: array
+        hooks:
+          $ref: "#/components/schemas/skill-definition-hooks"
       title: skill-definition
       type: object
     wrapper-validation:
@@ -13346,6 +12371,8 @@ components:
           items:
             type: string
           type: array
+        hooks:
+          $ref: "#/components/schemas/skill-definition-hooks"
       title: skill-definition-update
       type: object
     success-empty:
@@ -13737,65 +12764,20 @@ components:
           type: array
       title: node-skill-settings
       type: object
-    node-skill-hook-entry:
-      description: |
-        Lifecycle hook assignments for a single required skill, returned as part of the check-in response. Each stage that has a hook assigned includes the hook identifier, script, and timeout. Stages without a hook are omitted or null.
-      example:
-        skillName: chef-infra-client
-        preInstall:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        postInstall:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        postDelete:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        preDelete:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-      properties:
-        skillName:
-          description: Name of the skill these hooks apply to
-          example: chef-infra-client
-          type: string
-        preInstall:
-          $ref: "#/components/schemas/node-hook-inline"
-        postInstall:
-          $ref: "#/components/schemas/node-hook-inline"
-        preDelete:
-          $ref: "#/components/schemas/node-hook-inline"
-        postDelete:
-          $ref: "#/components/schemas/node-hook-inline"
-      required:
-      - skillName
-      title: node-skill-hook-entry
-      type: object
     node-hook-execution-status:
       description: |
-        A single hook execution record representing the outcome of running a lifecycle hook on a node at a specific point in a skill's lifecycle.
+        A single hook execution record representing the outcome of running a lifecycle hook script on a node. Hooks are identified by skill name and lifecycle stage since they are embedded directly in the skill definition.
       example:
         skillName: chef-infra-client
-        cohortId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         lifecycleStage: pre_install
         stdout: |-
           Running pre-install hook
           Checking dependencies...
         executedAt: 2000-01-23T04:56:07.000+00:00
-        skillAssemblyId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        hookId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        skillVersion: 18.4.2
         exitCode: 1
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         stderr: "error: required dependency 'libssl' not found"
-        hookName: pre-converge-hook
         status: failure
       properties:
         id:
@@ -13805,42 +12787,27 @@ components:
           title: UUID
           type: string
         skillName:
-          description: Name of the skill associated with this hook execution
+          description: Name of the skill whose lifecycle hook was executed
           example: chef-infra-client
           type: string
-        cohortId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        skillAssemblyId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        hookId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        hookName:
-          description: Name of the hook at the time of execution
-          example: pre-converge-hook
+        skillVersion:
+          description: Version of the skill that was being operated on when the hook
+            ran
+          example: 18.4.2
           type: string
         lifecycleStage:
           description: The lifecycle stage at which the hook was executed
           enum:
           - pre_install
           - post_install
+          - pre_update
+          - post_update
           - pre_delete
           - post_delete
           example: pre_install
           type: string
         status:
-          description: Execution outcome of the hook
+          description: Execution outcome of the hook script
           enum:
           - success
           - failure
@@ -13870,51 +12837,39 @@ components:
           type: string
       required:
       - executedAt
-      - hookId
-      - hookName
       - id
       - lifecycleStage
       - skillName
+      - skillVersion
       - status
       title: node-hook-execution-status
       type: object
     node-hook-execution-report:
       description: |
-        Payload sent by the node management agent to report the result of executing a lifecycle hook on the node. The agent reports one record per hook execution.
+        Payload sent by the node management agent to report the result of executing a lifecycle hook script on the node. The agent reports one record per hook execution. Hooks are identified by skill name and lifecycle stage since they are embedded directly in the skill definition.
       properties:
         skillName:
-          description: Name of the skill associated with this hook execution
+          description: Name of the skill whose lifecycle hook was executed
           example: chef-infra-client
           type: string
-        cohortId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        skillAssemblyId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        hookId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
+        skillVersion:
+          description: Version of the skill that was being operated on when the hook
+            ran
+          example: 18.4.2
           type: string
         lifecycleStage:
           description: The lifecycle stage at which the hook was executed
           enum:
           - pre_install
           - post_install
+          - pre_update
+          - post_update
           - pre_delete
           - post_delete
           example: pre_install
           type: string
         status:
-          description: Execution outcome of the hook
+          description: Execution outcome of the hook script
           enum:
           - success
           - failure
@@ -13938,11 +12893,9 @@ components:
           example: "error: required dependency 'libssl' not found"
           type: string
       required:
-      - cohortId
-      - hookId
       - lifecycleStage
-      - skillAssemblyId
       - skillName
+      - skillVersion
       - status
       title: node-hook-execution-report
       type: object
@@ -14497,11 +13450,6 @@ components:
             - value
             - value
           action: add
-          hooks:
-            preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - skill:
             name: chef-gohai
             channel: stable
@@ -14509,11 +13457,6 @@ components:
             - value
             - value
           action: add
-          hooks:
-            preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: my-skill-assembly
         description: A skill assembly for managing web server configuration
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -14625,139 +13568,6 @@ components:
       required:
       - bldrUrl
       title: node-agent-settings
-      type: object
-    hook-read:
-      description: |
-        A hook is a script that executes on a remote node. It carries OS-specific scripts: the agent runs the script matching its operating system and silently skips the hook if no script is provided for its OS.
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        name: pre-converge-hook
-        description: Runs a setup script before Chef Infra converge
-        timeoutSeconds: 60
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        id:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        name:
-          description: Name of the hook
-          example: pre-converge-hook
-          type: string
-        description:
-          description: Description of the hook
-          example: Runs a setup script before Chef Infra converge
-          type: string
-        linuxScript:
-          description: |
-            Base64-encoded script executed on Linux nodes (interpreted by bash). Absent if no Linux script was provided.
-          example: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        windowsScript:
-          description: |
-            Base64-encoded script executed on Windows nodes (interpreted by PowerShell). Absent if no Windows script was provided.
-          example: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        timeoutSeconds:
-          description: |
-            Maximum number of seconds the agent waits for the hook to complete before killing the process and reporting a timeout failure.
-          example: 60
-          format: int32
-          minimum: 1
-          type: integer
-        createdAt:
-          description: a DateTime in ISO8601
-          format: date-time
-          title: Datetime
-          type: string
-        updatedAt:
-          description: a DateTime in ISO8601
-          format: date-time
-          title: Datetime
-          type: string
-      required:
-      - id
-      - name
-      title: hook
-      type: object
-    hook-create:
-      description: |
-        Payload for creating a new hook. At least one of linuxScript or windowsScript must be provided. The agent will execute the script matching its operating system and silently skip the hook if no script is available for its OS.
-      properties:
-        name:
-          description: Name of the hook
-          example: pre-converge-hook
-          type: string
-        description:
-          description: Description of the hook
-          example: Runs a setup script before Chef Infra converge
-          type: string
-        linuxScript:
-          description: |
-            Base64-encoded script executed on Linux nodes (interpreted by bash). Required if windowsScript is not provided.
-          example: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        windowsScript:
-          description: |
-            Base64-encoded script executed on Windows nodes (interpreted by PowerShell). Required if linuxScript is not provided.
-          example: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        timeoutSeconds:
-          default: 300
-          description: |
-            Maximum number of seconds the agent waits for the hook to complete before killing the process and reporting a timeout failure. Defaults to 300.
-          example: 60
-          format: int32
-          minimum: 1
-          type: integer
-      required:
-      - name
-      title: hook-create
-      type: object
-    hook-update:
-      description: |
-        Payload for updating an existing hook. All fields replace the current values. At least one of linuxScript or windowsScript must be provided.
-      properties:
-        name:
-          description: Name of the hook
-          example: pre-converge-hook
-          type: string
-        description:
-          description: Description of the hook
-          example: Runs a setup script before Chef Infra converge
-          type: string
-        linuxScript:
-          description: |
-            Base64-encoded script executed on Linux nodes (interpreted by bash). Required if windowsScript is not provided.
-          example: IyEvYmluL2Jhc2gKZWNobyAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        windowsScript:
-          description: |
-            Base64-encoded script executed on Windows nodes (interpreted by PowerShell). Required if linuxScript is not provided.
-          example: V3JpdGUtSG9zdCAnVXBkYXRlZCBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        timeoutSeconds:
-          default: 300
-          description: |
-            Maximum number of seconds the agent waits for the hook to complete before killing the process and reporting a timeout failure. Defaults to 300.
-          example: 60
-          format: int32
-          minimum: 1
-          type: integer
-      required:
-      - name
-      title: hook-update
       type: object
     wrapper-kind:
       enum:
@@ -14926,6 +13736,49 @@ components:
       - content
       - fileName
       title: skill-config-template
+      type: object
+    skill-definition-hooks:
+      description: |
+        Lifecycle hook scripts embedded in a skill definition. These hooks are delivered to the agent via the skill definition sync (GET /skills) and apply automatically to every node where the skill is managed, regardless of the cohort or skill assembly in use. Each stage is optional. Only stages with at least one script defined are executed. The agent selects the OS-appropriate script (linuxScript or windowsScript) and silently skips the stage if no script is available for its OS.
+      example:
+        preInstall:
+          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          timeoutSeconds: 60
+          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        postUpdate:
+          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          timeoutSeconds: 60
+          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        postInstall:
+          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          timeoutSeconds: 60
+          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        postDelete:
+          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          timeoutSeconds: 60
+          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        preDelete:
+          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          timeoutSeconds: 60
+          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        preUpdate:
+          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          timeoutSeconds: 60
+          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+      properties:
+        preInstall:
+          $ref: "#/components/schemas/skill-lifecycle-hook"
+        postInstall:
+          $ref: "#/components/schemas/skill-lifecycle-hook"
+        preUpdate:
+          $ref: "#/components/schemas/skill-lifecycle-hook"
+        postUpdate:
+          $ref: "#/components/schemas/skill-lifecycle-hook"
+        preDelete:
+          $ref: "#/components/schemas/skill-lifecycle-hook"
+        postDelete:
+          $ref: "#/components/schemas/skill-lifecycle-hook"
+      title: skill-definition-hooks
       type: object
     validation:
       allOf:
@@ -15104,45 +13957,6 @@ components:
       - version
       title: node-skill-native
       type: object
-    node-hook-inline:
-      description: |
-        A compact hook representation included in the check-in response. Contains the hook identifier, OS-specific scripts, and execution timeout so the agent can execute the hook without an additional API call. The agent runs the script matching its OS and silently skips if no script is available for its OS.
-      example:
-        windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        timeoutSeconds: 60
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-      properties:
-        id:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        linuxScript:
-          description: |
-            Base64-encoded script for Linux nodes (interpreted by bash). Absent if no Linux script was defined for this hook.
-          example: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        windowsScript:
-          description: |
-            Base64-encoded script for Windows nodes (interpreted by PowerShell). Absent if no Windows script was defined for this hook.
-          example: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          format: byte
-          type: string
-        timeoutSeconds:
-          description: |
-            Maximum number of seconds the agent waits for this hook to complete before killing the process and reporting a timeout failure.
-          example: 60
-          format: int32
-          minimum: 1
-          type: integer
-      required:
-      - id
-      - timeoutSeconds
-      title: node-hook-inline
-      type: object
     filter-constraints:
       example:
         skills:
@@ -15261,19 +14075,42 @@ components:
           - value
           - value
         action: add
-        hooks:
-          preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         action:
           $ref: "#/components/schemas/skill-rule-action"
         skill:
           $ref: "#/components/schemas/skill-rule-skill"
-        hooks:
-          $ref: "#/components/schemas/skill-rule-hooks"
       title: skill-rule
+      type: object
+    skill-lifecycle-hook:
+      description: |
+        Script configuration for a single lifecycle stage of a skill definition. Both linuxScript and windowsScript are optional — provide whichever OS(es) apply. The agent executes the script matching its OS and silently skips the stage if no script is available for its OS.
+      example:
+        windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+        timeoutSeconds: 60
+        linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+      properties:
+        linuxScript:
+          description: |
+            Base64-encoded bash script executed on Linux nodes. If omitted, the stage is silently skipped on Linux nodes.
+          example: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          format: byte
+          type: string
+        windowsScript:
+          description: |
+            Base64-encoded PowerShell script executed on Windows nodes. If omitted, the stage is silently skipped on Windows nodes.
+          example: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+          format: byte
+          type: string
+        timeoutSeconds:
+          default: 300
+          description: |
+            Maximum number of seconds the agent waits for the script to complete before killing the process and reporting a timeout failure. Defaults to 300.
+          example: 60
+          format: int32
+          minimum: 1
+          type: integer
+      title: skill-lifecycle-hook
       type: object
     node-installed-skill-canister:
       description: |
@@ -15481,41 +14318,6 @@ components:
           type: array
       title: skill-rule-skill
       type: object
-    skill-rule-hooks:
-      description: |
-        Lifecycle hook mappings for a skill rule. Each stage optionally references a pre-created hook by ID. The referenced hook script will execute on the remote node at the corresponding point in the skill lifecycle. Supported stages: preInstall, postInstall, preDelete, postDelete.
-      example:
-        preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-      properties:
-        preInstall:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        postInstall:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        preDelete:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        postDelete:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-      title: skill-rule-hooks
-      type: object
     filter-operator:
       description: |
         "=": Checks if two values are identical. "!=": Tests if two values are different. "CONTAINS": Verifies if one value is within another. "MATCHES": Searches for patterns using regular expressions.
@@ -15615,6 +14417,31 @@ components:
             versionRegex: "sed -nre 's/^[^0-9]*(([0-9]+\\.)*[0-9]+).*/\\1/p'"
             versionCommand: chef-client --version
           name: name
+          hooks:
+            preInstall:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postUpdate:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postInstall:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postDelete:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            preDelete:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            preUpdate:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           dependencies:
           - dependencies
           - dependencies
@@ -15637,6 +14464,31 @@ components:
             versionRegex: "sed -nre 's/^[^0-9]*(([0-9]+\\.)*[0-9]+).*/\\1/p'"
             versionCommand: chef-client --version
           name: name
+          hooks:
+            preInstall:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postUpdate:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postInstall:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postDelete:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            preDelete:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            preUpdate:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           dependencies:
           - dependencies
           - dependencies
@@ -15688,6 +14540,31 @@ components:
             versionRegex: "sed -nre 's/^[^0-9]*(([0-9]+\\.)*[0-9]+).*/\\1/p'"
             versionCommand: chef-client --version
           name: name
+          hooks:
+            preInstall:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postUpdate:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postInstall:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            postDelete:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            preDelete:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            preUpdate:
+              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+              timeoutSeconds: 60
+              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           dependencies:
           - dependencies
           - dependencies
@@ -16182,51 +15059,6 @@ components:
       title: node-attributes-modify-response
     node_checkin_response_data:
       example:
-        cohortId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        requiredSkillHooks:
-        - skillName: chef-infra-client
-          preInstall:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          postInstall:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          postDelete:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          preDelete:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        - skillName: chef-infra-client
-          preInstall:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          postInstall:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          postDelete:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          preDelete:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            timeoutSeconds: 60
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-        skillAssemblyId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         nodeVersion: 1
         settingsId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         requiredSkills:
@@ -16265,18 +15097,6 @@ components:
           format: int64
           minimum: 0
           type: integer
-        cohortId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
-        skillAssemblyId:
-          description: a Guid
-          format: uuid
-          pattern: "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}"
-          title: UUID
-          type: string
         settingsId:
           description: a Guid
           format: uuid
@@ -16299,12 +15119,6 @@ components:
           items:
             $ref: "#/components/schemas/node-skill-settings"
           type: array
-        requiredSkillHooks:
-          description: |
-            Lifecycle hook assignments for the node's required skills. Each entry maps a skill name to the hooks that should be executed at each lifecycle stage (preInstall, postInstall, preDelete, postDelete). Only skills that have at least one hook assigned are included.
-          items:
-            $ref: "#/components/schemas/node-skill-hook-entry"
-          type: array
       title: node-checkin-response-data
       type: object
     node_checkin_response:
@@ -16312,51 +15126,6 @@ components:
       - $ref: "#/components/schemas/wrapper-item"
       example:
         item:
-          cohortId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          requiredSkillHooks:
-          - skillName: chef-infra-client
-            preInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            postInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            postDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            preDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          - skillName: chef-infra-client
-            preInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            postInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            postDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-            preDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-              timeoutSeconds: 60
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          skillAssemblyId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           nodeVersion: 1
           settingsId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           requiredSkills:
@@ -16398,32 +15167,26 @@ components:
       example:
         items:
         - skillName: chef-infra-client
-          cohortId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           lifecycleStage: pre_install
           stdout: |-
             Running pre-install hook
             Checking dependencies...
           executedAt: 2000-01-23T04:56:07.000+00:00
-          skillAssemblyId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hookId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          skillVersion: 18.4.2
           exitCode: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           stderr: "error: required dependency 'libssl' not found"
-          hookName: pre-converge-hook
           status: failure
         - skillName: chef-infra-client
-          cohortId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           lifecycleStage: pre_install
           stdout: |-
             Running pre-install hook
             Checking dependencies...
           executedAt: 2000-01-23T04:56:07.000+00:00
-          skillAssemblyId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hookId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          skillVersion: 18.4.2
           exitCode: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           stderr: "error: required dependency 'libssl' not found"
-          hookName: pre-converge-hook
           status: failure
       properties:
         items:
@@ -16437,18 +15200,15 @@ components:
       example:
         item:
           skillName: chef-infra-client
-          cohortId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           lifecycleStage: pre_install
           stdout: |-
             Running pre-install hook
             Checking dependencies...
           executedAt: 2000-01-23T04:56:07.000+00:00
-          skillAssemblyId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          hookId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          skillVersion: 18.4.2
           exitCode: 1
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           stderr: "error: required dependency 'libssl' not found"
-          hookName: pre-converge-hook
           status: failure
       properties:
         item:
@@ -17215,11 +15975,6 @@ components:
               - value
               - value
             action: add
-            hooks:
-              preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - skill:
               name: chef-gohai
               channel: stable
@@ -17227,11 +15982,6 @@ components:
               - value
               - value
             action: add
-            hooks:
-              preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: my-skill-assembly
           description: A skill assembly for managing web server configuration
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17243,11 +15993,6 @@ components:
               - value
               - value
             action: add
-            hooks:
-              preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - skill:
               name: chef-gohai
               channel: stable
@@ -17255,11 +16000,6 @@ components:
               - value
               - value
             action: add
-            hooks:
-              preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: my-skill-assembly
           description: A skill assembly for managing web server configuration
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17304,11 +16044,6 @@ components:
               - value
               - value
             action: add
-            hooks:
-              preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - skill:
               name: chef-gohai
               channel: stable
@@ -17316,11 +16051,6 @@ components:
               - value
               - value
             action: add
-            hooks:
-              preInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postInstall: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              postDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              preDelete: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: my-skill-assembly
           description: A skill assembly for managing web server configuration
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -17328,84 +16058,6 @@ components:
         item:
           $ref: "#/components/schemas/skill-assembly"
       title: skill-assembly-get-response
-    hook_list_response:
-      allOf:
-      - $ref: "#/components/schemas/wrapper-paginated"
-      example:
-        items:
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          name: pre-converge-hook
-          description: Runs a setup script before Chef Infra converge
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        - createdAt: 2000-01-23T04:56:07.000+00:00
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          name: pre-converge-hook
-          description: Runs a setup script before Chef Infra converge
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        items:
-          items:
-            $ref: "#/components/schemas/hook-read"
-          type: array
-      title: hook-list-response
-    hook_create_response:
-      allOf:
-      - $ref: "#/components/schemas/wrapper-item"
-      example:
-        item:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          name: pre-converge-hook
-          description: Runs a setup script before Chef Infra converge
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        item:
-          $ref: "#/components/schemas/hook-read"
-      title: hook-create-response
-    hook_get_response:
-      allOf:
-      - $ref: "#/components/schemas/wrapper-item"
-      example:
-        item:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          name: pre-converge-hook
-          description: Runs a setup script before Chef Infra converge
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        item:
-          $ref: "#/components/schemas/hook-read"
-      title: hook-get-response
-    hook_update_response:
-      allOf:
-      - $ref: "#/components/schemas/wrapper-item"
-      example:
-        item:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          name: pre-converge-hook
-          description: Runs a setup script before Chef Infra converge
-          timeoutSeconds: 60
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtY29udmVyZ2UgaG9vaycK
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        item:
-          $ref: "#/components/schemas/hook-read"
-      title: hook-update-response
     wrapper_validation_errors_inner:
       example:
         code: 0
