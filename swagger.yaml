@@ -13,7 +13,7 @@ info:
     x-identifier: LicenseRef-EULA
   termsOfService: https://www.chef.io/online-master-agreement
   title: Chef node management
-  version: 1.4.31
+  version: 1.4.33
   x-service-domain: node
   x-domain-service: management
 externalDocs:
@@ -116,6 +116,33 @@ paths:
                     fileName: config.rb
                     filePath: /etc/chef
                     windowsFilePath: c:/chef
+                  hooks:
+                    preInstall:
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                        timeoutSeconds: 60
+                      - targetPlatform: windows
+                        script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                        timeoutSeconds: 60
+                    postInstall:
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                        timeoutSeconds: 30
+                    preUpdate:
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                        timeoutSeconds: 60
+                      - targetPlatform: windows
+                        script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                        timeoutSeconds: 60
+                    postUpdate:
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                        timeoutSeconds: 30
                 - name: chef-gohai
                   canister:
                     origin: chef-platform
@@ -250,19 +277,31 @@ paths:
                     windowsFilePath: c:/chef
                   hooks:
                     preInstall:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-                      timeoutSeconds: 60
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                        timeoutSeconds: 60
+                      - targetPlatform: windows
+                        script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                        timeoutSeconds: 60
                     postInstall:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
-                      timeoutSeconds: 30
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                        timeoutSeconds: 30
                     preUpdate:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                      timeoutSeconds: 60
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                        timeoutSeconds: 60
+                      - targetPlatform: windows
+                        script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                        timeoutSeconds: 60
                     postUpdate:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
-                      timeoutSeconds: 30
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                        timeoutSeconds: 30
               chef-gohai-example:
                 value:
                   name: chef-gohai
@@ -561,19 +600,31 @@ paths:
                         windowsFilePath: c:/chef
                       hooks:
                         preInstall:
-                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-                          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-                          timeoutSeconds: 60
+                          scripts:
+                          - targetPlatform: linux
+                            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                            timeoutSeconds: 60
+                          - targetPlatform: windows
+                            script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                            timeoutSeconds: 60
                         postInstall:
-                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
-                          timeoutSeconds: 30
+                          scripts:
+                          - targetPlatform: linux
+                            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                            timeoutSeconds: 30
                         preUpdate:
-                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                          timeoutSeconds: 60
+                          scripts:
+                          - targetPlatform: linux
+                            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                            timeoutSeconds: 60
+                          - targetPlatform: windows
+                            script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                            timeoutSeconds: 60
                         postUpdate:
-                          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
-                          timeoutSeconds: 30
+                          scripts:
+                          - targetPlatform: linux
+                            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                            timeoutSeconds: 30
                 chef-gohai:
                   value:
                     kind: object
@@ -736,17 +787,29 @@ paths:
                 windowsFilePath: c:/chef
               hooks:
                 preInstall:
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-                  timeoutSeconds: 60
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                    timeoutSeconds: 60
+                  - targetPlatform: windows
+                    script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                    timeoutSeconds: 60
                 preUpdate:
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                  timeoutSeconds: 60
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                    timeoutSeconds: 60
+                  - targetPlatform: windows
+                    script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                    timeoutSeconds: 60
                 preDelete:
-                  linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
-                  windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
-                  timeoutSeconds: 30
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
+                    timeoutSeconds: 30
+                  - targetPlatform: windows
+                    script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
+                    timeoutSeconds: 30
             schema:
               $ref: "#/components/schemas/skill-update"
         description: The updated skill definition
@@ -3615,8 +3678,10 @@ paths:
     get:
       description: |
         This operation retrieves a paginated list of all hook execution records
-        for a given node, across all skills and lifecycle stages. Records are
-        returned in reverse chronological order (most recent first).
+        for a given node, across all lifecycle stages. Records are returned in
+        reverse chronological order (most recent first).
+
+        Use the `skillName` query parameter to narrow results to a specific skill.
 
         Use this to inspect the history of hook executions on a node, diagnose
         failed hooks, or verify that lifecycle hooks ran as expected.
@@ -3630,6 +3695,14 @@ paths:
         schema:
           $ref: "#/components/schemas/uuid"
         style: simple
+      - description: "Filter hook execution records by skill name. When provided,\
+          \ only records for the specified skill are returned."
+        in: query
+        name: skillName
+        required: false
+        schema:
+          example: chef-infra-client
+          type: string
       - description: items per page
         example: 10
         explode: false
@@ -3659,13 +3732,14 @@ paths:
                 code: 200
                 params:
                   query:
+                    skillName: chef-infra-client
                     pagination:
                       start: 1
                 pagination:
-                  pageItemCount: 2
+                  pageItemCount: 3
                   itemsPerPage: 10
                   startIndex: 1
-                  totalItems: 2
+                  totalItems: 3
                   page: 1
                   totalPages: 1
                 items:
@@ -10475,6 +10549,33 @@ components:
                 fileName: config.rb
                 filePath: /etc/chef
                 windowsFilePath: c:/chef
+              hooks:
+                preInstall:
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                    timeoutSeconds: 60
+                  - targetPlatform: windows
+                    script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                    timeoutSeconds: 60
+                postInstall:
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                    timeoutSeconds: 30
+                preUpdate:
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                    timeoutSeconds: 60
+                  - targetPlatform: windows
+                    script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                    timeoutSeconds: 60
+                postUpdate:
+                  scripts:
+                  - targetPlatform: linux
+                    script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                    timeoutSeconds: 30
             - name: chef-gohai
               canister:
                 origin: chef-platform
@@ -10656,19 +10757,31 @@ components:
                     windowsFilePath: c:/chef
                   hooks:
                     preInstall:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-                      timeoutSeconds: 60
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                        timeoutSeconds: 60
+                      - targetPlatform: windows
+                        script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                        timeoutSeconds: 60
                     postInstall:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
-                      timeoutSeconds: 30
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LWluc3RhbGwgaG9vaycK
+                        timeoutSeconds: 30
                     preUpdate:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                      windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
-                      timeoutSeconds: 60
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                        timeoutSeconds: 60
+                      - targetPlatform: windows
+                        script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                        timeoutSeconds: 60
                     postUpdate:
-                      linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
-                      timeoutSeconds: 30
+                      scripts:
+                      - targetPlatform: linux
+                        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwb3N0LXVwZGF0ZSBob29rJwo=
+                        timeoutSeconds: 30
             chef-gohai:
               value:
                 kind: object
@@ -11205,13 +11318,14 @@ components:
             code: 200
             params:
               query:
+                skillName: chef-infra-client
                 pagination:
                   start: 1
             pagination:
-              pageItemCount: 2
+              pageItemCount: 3
               itemsPerPage: 10
               startIndex: 1
-              totalItems: 2
+              totalItems: 3
               page: 1
               totalPages: 1
             items:
@@ -12182,29 +12296,53 @@ components:
         name: name
         hooks:
           preInstall:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-            timeoutSeconds: 60
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            scripts:
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           postUpdate:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-            timeoutSeconds: 60
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            scripts:
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           postInstall:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-            timeoutSeconds: 60
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            scripts:
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           postDelete:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-            timeoutSeconds: 60
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            scripts:
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           preDelete:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-            timeoutSeconds: 60
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            scripts:
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           preUpdate:
-            windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-            timeoutSeconds: 60
-            linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            scripts:
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+            - timeoutSeconds: 60
+              targetPlatform: linux
+              script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         dependencies:
         - dependencies
         - dependencies
@@ -13739,32 +13877,56 @@ components:
       type: object
     skill-definition-hooks:
       description: |
-        Lifecycle hook scripts embedded in a skill definition. These hooks are delivered to the agent via the skill definition sync (GET /skills) and apply automatically to every node where the skill is managed, regardless of the cohort or skill assembly in use. Each stage is optional. Only stages with at least one script defined are executed. The agent selects the OS-appropriate script (linuxScript or windowsScript) and silently skips the stage if no script is available for its OS.
+        Lifecycle hook scripts embedded in a skill definition. These hooks are delivered to the agent via the skill definition sync (GET /skills) and apply automatically to every node where the skill is managed, regardless of the cohort or skill assembly in use. Each stage is optional. Only stages with at least one script defined are executed. The agent selects the script whose targetPlatform matches its own platform and silently skips the stage if no matching script is found.
       example:
         preInstall:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          timeoutSeconds: 60
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          scripts:
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         postUpdate:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          timeoutSeconds: 60
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          scripts:
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         postInstall:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          timeoutSeconds: 60
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          scripts:
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         postDelete:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          timeoutSeconds: 60
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          scripts:
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         preDelete:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          timeoutSeconds: 60
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          scripts:
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
         preUpdate:
-          windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          timeoutSeconds: 60
-          linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          scripts:
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          - timeoutSeconds: 60
+            targetPlatform: linux
+            script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
       properties:
         preInstall:
           $ref: "#/components/schemas/skill-lifecycle-hook"
@@ -14084,32 +14246,22 @@ components:
       type: object
     skill-lifecycle-hook:
       description: |
-        Script configuration for a single lifecycle stage of a skill definition. Both linuxScript and windowsScript are optional — provide whichever OS(es) apply. The agent executes the script matching its OS and silently skips the stage if no script is available for its OS.
+        Script configuration for a single lifecycle stage of a skill definition. Provide one entry per target platform. The agent executes the script whose targetPlatform matches its own platform and silently skips the stage if no matching entry is found. Each platform may appear at most once per stage — duplicate targetPlatform values within the same stage are rejected with a validation error.
       example:
-        windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-        timeoutSeconds: 60
-        linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        scripts:
+        - timeoutSeconds: 60
+          targetPlatform: linux
+          script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+        - timeoutSeconds: 60
+          targetPlatform: linux
+          script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
       properties:
-        linuxScript:
+        scripts:
           description: |
-            Base64-encoded bash script executed on Linux nodes. If omitted, the stage is silently skipped on Linux nodes.
-          example: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
-          format: byte
-          type: string
-        windowsScript:
-          description: |
-            Base64-encoded PowerShell script executed on Windows nodes. If omitted, the stage is silently skipped on Windows nodes.
-          example: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-          format: byte
-          type: string
-        timeoutSeconds:
-          default: 300
-          description: |
-            Maximum number of seconds the agent waits for the script to complete before killing the process and reporting a timeout failure. Defaults to 300.
-          example: 60
-          format: int32
-          minimum: 1
-          type: integer
+            List of platform-specific scripts for this lifecycle stage. Each entry targets a specific platform. At most one entry per targetPlatform value is allowed within a stage.
+          items:
+            $ref: "#/components/schemas/skill_lifecycle_hook_scripts_inner"
+          type: array
       title: skill-lifecycle-hook
       type: object
     node-installed-skill-canister:
@@ -14419,29 +14571,53 @@ components:
           name: name
           hooks:
             preInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postUpdate:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             preDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             preUpdate:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           dependencies:
           - dependencies
           - dependencies
@@ -14466,29 +14642,53 @@ components:
           name: name
           hooks:
             preInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postUpdate:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             preDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             preUpdate:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           dependencies:
           - dependencies
           - dependencies
@@ -14542,29 +14742,53 @@ components:
           name: name
           hooks:
             preInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postUpdate:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postInstall:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             postDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             preDelete:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
             preUpdate:
-              windowsScript: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
-              timeoutSeconds: 60
-              linuxScript: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              scripts:
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+              - timeoutSeconds: 60
+                targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
           dependencies:
           - dependencies
           - dependencies
@@ -14590,6 +14814,31 @@ components:
             fileName: config.rb
             filePath: /etc/chef
             windowsFilePath: c:/chef
+          hooks:
+            preInstall:
+              scripts:
+              - targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+                timeoutSeconds: 60
+              - targetPlatform: windows
+                script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJw==
+                timeoutSeconds: 60
+            preUpdate:
+              scripts:
+              - targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                timeoutSeconds: 60
+              - targetPlatform: windows
+                script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtdXBkYXRlIGhvb2snCg==
+                timeoutSeconds: 60
+            preDelete:
+              scripts:
+              - targetPlatform: linux
+                script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
+                timeoutSeconds: 30
+              - targetPlatform: windows
+                script: V3JpdGUtSG9zdCAnUnVubmluZyBwcmUtZGVsZXRlIGhvb2snCg==
+                timeoutSeconds: 30
       properties:
         item:
           $ref: "#/components/schemas/skill-definition"
@@ -16081,6 +16330,38 @@ components:
           items:
             $ref: "#/components/schemas/validation"
           type: array
+      type: object
+    skill_lifecycle_hook_scripts_inner:
+      example:
+        timeoutSeconds: 60
+        targetPlatform: linux
+        script: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+      properties:
+        targetPlatform:
+          description: |
+            The target platform this script applies to. The agent matches this value against its own platform and executes only the matching script.
+          enum:
+          - linux
+          - windows
+          example: linux
+          type: string
+        script:
+          description: |
+            Base64-encoded script content. Executed as a bash script on Linux and as a PowerShell script on Windows.
+          example: IyEvYmluL2Jhc2gKZWNobyAnUnVubmluZyBwcmUtaW5zdGFsbCBob29rJwo=
+          format: byte
+          type: string
+        timeoutSeconds:
+          default: 300
+          description: |
+            Maximum number of seconds the agent waits for this script to complete before killing the process and reporting a timeout failure. Defaults to 300.
+          example: 60
+          format: int32
+          minimum: 1
+          type: integer
+      required:
+      - script
+      - targetPlatform
       type: object
   securitySchemes:
     apiKey:
